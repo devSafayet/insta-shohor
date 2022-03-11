@@ -27,9 +27,10 @@ const reportPost = (id) => {
   showPosts(remainingPosts);
 };
 
-const displayContent = (text) => {
-  return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
-};
+// const displayContent = (text) => {
+//   return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+// };
+
 
 const switchTab = (id) => {
   if (id === "posts") {
@@ -53,9 +54,18 @@ const switchTab = (id) => {
 
 const createPost = (post) => {
   const image = post.image;
-
+  console.log(post)
   const div = document.createElement("article");
   div.classList.add("post");
+  // description ----------------------
+  let description;
+  if (post.description.length < 30) {
+    description = post.description;
+  }
+  else {
+    description = post.description.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+  }
+  // ------------- 
   div.innerHTML = `
               <div class="post__header">
                 <div class="post__profile">
@@ -104,7 +114,7 @@ const createPost = (post) => {
                   </button>
                 </div>
 
-                <div class="post__content">${displayContent(post.description)}</div>
+                <div class="post__content"> ${description}</div>
 
                 <div class="post__infos">
                   <div class="post__likes">
@@ -122,15 +132,16 @@ const createPost = (post) => {
                   <div class="post__description">
                     <small>
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
-                      </a>
-                      ${post.comments?.text}
-                    </small>
-                  </div>
-                  <span class="post__date-time">30 minutes ago</span>
-                </div>
-              </div>
-      `;
+                          ${post.comments.user
+    }
+                      </a >
+  ${post.comments.text}
+                    </small >
+                  </div >
+  <span class="post__date-time">30 minutes ago</span>
+                </div >
+              </div >
+  `;
   return div;
 };
 
