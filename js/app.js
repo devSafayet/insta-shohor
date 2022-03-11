@@ -66,6 +66,7 @@ const createPost = (post) => {
   else {
     description = post.description.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
   }
+
   // ------------- 
   div.innerHTML = `
               <div class="post__header">
